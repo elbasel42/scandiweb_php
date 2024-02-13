@@ -1,3 +1,3 @@
 <?php
 
-echo "HomePage";
+require_once "../config/config.php";
