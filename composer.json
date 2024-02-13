@@ -1,0 +1,15 @@
+{
+  "name": "elbasel/mvc",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Abdelrahman Elbasel",
+      "email": "abdelrahman.elbasel42@gmail.com"
+    }
+  ],
+  "require": {}
+}
