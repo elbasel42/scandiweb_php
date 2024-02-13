@@ -3,7 +3,8 @@
 define('SITE_NAME', 'your-site-name');
 
 //App Root
-define('APP_ROOT', dirname(dirname(__FILE__)));
+// define('APP_ROOT', dirname(dirname(__FILE__)));
+define('APP_ROOT', "/var/www/html/app");
 define('URL_ROOT', '/');
 define('URL_SUBFOLDER', '');
 
