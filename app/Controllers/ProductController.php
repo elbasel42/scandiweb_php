@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Product;
-use Symfony\Component\Routing\RouteCollection;
+// use Symfony\Component\Routing\RouteCollection;
 
 class ProductController
 {
@@ -15,7 +15,7 @@ class ProductController
         if ($request_method === "GET") {
             require_once APP_ROOT . '/Views/addProduct.php';
         } elseif ($request_method === "POST") {
-            // $productType = $_POST['type'];
+            $productType = $_POST['type'];
             // $className = '\\App\\Models\\' . $productType;
             // $className::create([
             $title = $_POST['name'];
@@ -24,6 +24,7 @@ class ProductController
                 'title' => $title,
                 'price' => 2,
                 'weight' => 5,
+                'type' => $productType
             ]);
             // echo "saved";
             // sleep(3);

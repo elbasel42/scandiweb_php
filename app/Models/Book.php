@@ -21,6 +21,15 @@ class Book extends Product
         return $this->weight;
     }
 
+    public function render()
+
+    {
+        $weight = $this->getWeight();
+        $initialRender = parent::render();
+
+        return "{$initialRender}<li>{$weight}</li>";
+    }
+
     // public static function store($data)
     // 
     // {
@@ -33,12 +42,4 @@ class Book extends Product
     //     $connection->execute_query($sql, [$sku, $title, $price, $weight]);
     // }
 
-    public function render()
-
-    {
-        $weight = $this->getWeight();
-        $parentRender = parent::render();
-
-        return "{$parentRender}<li>{$weight}</li>";
-    }
 }

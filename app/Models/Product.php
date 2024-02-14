@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Book;
 use mysqli;
 
-abstract class Product
+class Product
 {
     public function __construct(protected int $sku, protected $title, protected $price)
 
@@ -36,10 +36,19 @@ abstract class Product
 
     public static function getAllProducts()
     {
-        return [
-            new Book(1, 'hello', 22, 2),
-            new Book(3, 'yay', 55, 2)
-        ];
+        $products = [];
+        $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $sql = "SELECT * from products";
+        $rows = $connection->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
+        foreach ($rows as $r) {
+            $productType = $r['type'];
+            $productClass = '\\App\\Models\\' . $productType;
+            unset($r['id']);
+            unset($r['type']);
+            unset($r['size']);
+            array_push($products, new $productClass(...$r));
+        }
+        return $products;
     }
 
 

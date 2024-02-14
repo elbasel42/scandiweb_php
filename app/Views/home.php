@@ -3,8 +3,11 @@
 
 <body>
     <h1>Homepage</h1>
+
     <?php foreach ($allProducts as $product) : ?>
-        <?= $product->render(); ?>
+        <ul class="product">
+            <?= $product->render(); ?>
+        </ul>
     <?php endforeach ?>
 </body>
 
