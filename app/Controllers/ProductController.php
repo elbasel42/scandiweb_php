@@ -32,4 +32,9 @@ class ProductController
             // die();
         }
     }
+    
+    function delete() {
+        // use post via javascript;
+        $ids_to_delete = $_POST['delete'];
+    }
 }

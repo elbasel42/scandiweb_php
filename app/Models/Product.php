@@ -8,7 +8,7 @@ use mysqli;
 
 class Product
 {
-    public function __construct(protected int $sku, protected string $title, protected $price)
+    public function __construct(protected int $id, protected int $sku, protected string $title, protected float $price)
 
     {
     }
@@ -16,7 +16,7 @@ class Product
     public function render()
     {
 
-        return "<li>{$this->getSku()}</li><li>{$this->getTitle()}</li><li>{$this->getPrice()}</li>";
+        return "<li class='product-id'>{$this->getId()}</li><li>{$this->getSku()}</li><li>{$this->getTitle()}</li><li>{$this->getPrice()}</li>";
     }
     // abstract static function store(array $data);
     public static function store($data)
@@ -52,6 +52,11 @@ class Product
 
 
     // GET METHODS
+
+    public function getId() {
+        return $this->id;
+
+    }
 
     public function getTitle()
     {
@@ -90,8 +95,9 @@ class Product
 
 
 
-    public function delete(int $id)
+    public function delete($ids)
     {
+        // copy code from prev implementation;
     }
 
     // public function read(int $id)

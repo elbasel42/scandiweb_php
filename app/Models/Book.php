@@ -11,12 +11,13 @@ class Book extends Product
 
     public function __construct($data)
     {
+        $id = $data['id'];
         $sku = $data['sku'];
         $title = $data['title'];
         $price = $data['price'];
         $weight = $data['weight'];
 
-        parent::__construct($sku, $title, $price);
+        parent::__construct($id, $sku, $title, $price);
         $this->weight = $weight;
     }
 
