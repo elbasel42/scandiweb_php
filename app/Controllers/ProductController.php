@@ -15,4 +15,14 @@ class ProductController
 
         require_once APP_ROOT . '/Views/product.php';
     }
+    public function addAction(RouteCollection $routes)
+    {
+        $request_method = $_SERVER['REQUEST_METHOD'];
+        if ($request_method === "GET") {
+            require_once APP_ROOT . '/Views/addProduct.php';
+        } elseif ($request_method === "POST") {
+
+            echo $_POST['name'];
+        }
+    }
 }
