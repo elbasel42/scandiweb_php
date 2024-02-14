@@ -12,4 +12,4 @@ define('URL_SUBFOLDER', '');
 define('DB_HOST', 'database');
 define('DB_USER', 'root');
 define('DB_PASS', $_ENV['MYSQL_ROOT_PASSWORD']);
-define('DB_NAME', 'default');
+define('DB_NAME', 'Products');
