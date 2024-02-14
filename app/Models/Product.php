@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Book;
+// use App\Modles
 use mysqli;
 
 class Product
 {
-    public function __construct(protected int $sku, protected $title, protected $price)
+    public function __construct(protected int $sku, protected string $title, protected $price)
 
     {
     }
@@ -40,13 +41,11 @@ class Product
         $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $sql = "SELECT * from products";
         $rows = $connection->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
+
         foreach ($rows as $r) {
             $productType = $r['type'];
             $productClass = '\\App\\Models\\' . $productType;
-            unset($r['id']);
-            unset($r['type']);
-            unset($r['size']);
-            array_push($products, new $productClass(...$r));
+            array_push($products, new $productClass($r));
         }
         return $products;
     }
