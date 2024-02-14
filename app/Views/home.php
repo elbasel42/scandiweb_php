@@ -16,9 +16,16 @@
 
     <section>
         <h1>Homepage</h1>
-        <p>
-            <a href="<?php echo $routeToProduct ?>">Check the first product</a>
-        </p>
+        <?php foreach ($allProducts as $product) : ?>
+            <ul>
+                <li><?= $product->getTitle() ?></li>
+            </ul>
+
+
+        <?php endforeach ?>
+
+
+
         <section>
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

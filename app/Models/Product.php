@@ -5,11 +5,12 @@ namespace App\Models;
 class Product
 {
     protected $id;
-    protected $title;
-    protected $description;
-    protected $price;
-    protected $sku;
-    protected $image;
+
+
+    public function __construct(protected int $sku, protected $title, protected $price)
+    {
+    }
+
 
     // GET METHODS
     public function getId()
@@ -22,10 +23,6 @@ class Product
         return $this->title;
     }
 
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     public function getPrice()
     {
@@ -37,10 +34,6 @@ class Product
         return $this->sku;
     }
 
-    public function getImage()
-    {
-        return $this->image;
-    }
 
     // SET METHODS
     public function setTitle(string $title)
@@ -48,10 +41,6 @@ class Product
         $this->title = $title;
     }
 
-    public function setDescription(string $description)
-    {
-        $this->description = $description;
-    }
 
     public function setPrice(string $price)
     {
@@ -63,9 +52,12 @@ class Product
         $this->sku = $sku;
     }
 
-    public function setImage(string $image)
+
+    public static function getAllProducts()
     {
-        $this->image = $image;
+        return [
+            new Product(1, 'hello', 22)
+        ];
     }
 
     // CRUD OPERATIONS
@@ -73,13 +65,12 @@ class Product
     {
     }
 
-    public function read(int $id)
+    // public function read(int $id)
+    public function read()
     {
         $this->title = 'My first Product';
-        $this->description = 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ';
         $this->price = 2.56;
         $this->sku = 'MVC-SP-PHP-01';
-        $this->image = 'https://via.placeholder.com/150';
 
         return $this;
     }
