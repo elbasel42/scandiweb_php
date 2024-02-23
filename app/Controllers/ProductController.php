@@ -15,16 +15,20 @@ class ProductController
         if ($request_method === "GET") {
             require_once APP_ROOT . '/Views/addProduct.php';
         } elseif ($request_method === "POST") {
-            $productType = $_POST['type'];
+            $productType = $_POST['product_type'];
             // $className = '\\App\\Models\\' . $productType;
             // $className::create([
-            $title = $_POST['name'];
+            $sku = $_POST['sku'];
+            $title = $_POST['title'];
+            $price = $_POST['price'];
+            $weight = $_POST['weight'] ?? Null;
+            $height = $_POST['height'] ?? Null;
             Product::store([
-                'sku' => 1,
+                'sku' => $sku,
                 'title' => $title,
                 'price' => 2,
                 'weight' => 5,
-                'type' => $productType
+                'product_type' => $productType
             ]);
             // echo "saved";
             // sleep(3);

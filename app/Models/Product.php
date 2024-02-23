@@ -6,7 +6,7 @@ use mysqli;
 
 class Product
 {
-    public function __construct(protected int $id, protected int $sku, protected string $title, protected float $price)
+    public function __construct(protected int $id, protected string $sku, protected string $title, protected float $price)
 
     {
     }
@@ -40,7 +40,7 @@ class Product
         $rows = $connection->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
 
         foreach ($rows as $r) {
-            $productType = $r['type'];
+            $productType = $r['product_type'];
             $productClass = '\\App\\Models\\' . $productType;
             array_push($products, new $productClass($r));
         }

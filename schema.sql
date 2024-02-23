@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS products (
     title varchar(255) NOT NULL,
     price decimal(12, 5) NOT NULL,
     sku varchar(255) NOT NULL,
-    type varchar(255) NOT NULL,
+    product_type varchar(255) NOT NULL,
     weight decimal(12, 6),
     size decimal(12, 6),
     PRIMARY KEY (id)
