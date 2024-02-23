@@ -32,9 +32,17 @@ class ProductController
             // die();
         }
     }
-    
-    function delete() {
+
+    function delete()
+    {
         // use post via javascript;
-        $ids_to_delete = $_POST['delete'];
+        // $ids_to_delete = $_POST['delete'];
+        // var_dump($ids_to_delete);
+        // var_dump($_POST);
+        foreach ($_POST as $id => $value) {
+
+            Product::delete($id);
+        }
+        header('Location: ' . '/');
     }
 }

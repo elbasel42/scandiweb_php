@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Book;
-// use App\Modles
 use mysqli;
 
 class Product
@@ -15,13 +13,11 @@ class Product
 
     public function render()
     {
-
         return "<li class='product-id'>{$this->getId()}</li><li>{$this->getSku()}</li><li>{$this->getTitle()}</li><li>{$this->getPrice()}</li>";
     }
-    // abstract static function store(array $data);
+
     public static function store($data)
     {
-
         $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $keys = [];
         $values = [];
@@ -33,6 +29,7 @@ class Product
         $keys_string = implode(', ', $keys);
         $sql = "INSERT INTO products ($keys_string) VALUES ($question_marks_string)";
         $connection->execute_query($sql, [...$values]);
+        $connection->close();
     }
 
     public static function getAllProducts()
@@ -47,15 +44,21 @@ class Product
             $productClass = '\\App\\Models\\' . $productType;
             array_push($products, new $productClass($r));
         }
+        $connection->close();
         return $products;
     }
 
+    public static function delete($id)
+    {
+        $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $sql = "DELETE FROM products WHERE id = ?";
+        $connection->execute_query($sql, [$id]);
+    }
 
     // GET METHODS
-
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
-
     }
 
     public function getTitle()
@@ -91,27 +94,4 @@ class Product
     {
         $this->sku = $sku;
     }
-
-
-
-
-    public function delete($ids)
-    {
-        // copy code from prev implementation;
-    }
-
-    // public function read(int $id)
-    // public function read()
-    // {
-    // $this->title = 'My first Product';
-    // $this->price = 2.56;
-    // $this->sku = 'MVC-SP-PHP-01';
-    // 
-    // return $this;
-    // }
-
-    // public function update(int $id, array $data)
-    // {
-    // }
-
 }

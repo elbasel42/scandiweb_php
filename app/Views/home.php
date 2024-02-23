@@ -4,11 +4,18 @@
 <body>
     <h1>Homepage</h1>
 
-    <?php foreach ($allProducts as $product) : ?>
-        <ul class="product">
-            <?= $product->render(); ?>
-        </ul>
-    <?php endforeach ?>
+    <a href="/product/add">Add Product</a>
+    <form action="/product/delete" method="POST">
+        <button>Mass Delete</button>
+        <?php foreach ($allProducts as $product) : ?>
+            <div>
+                <input type="checkbox" name="<?= $product->getId() ?>" id="<?= $product->getId() ?>">
+                <ul class="product">
+                    <?= $product->render(); ?>
+                </ul>
+            </div>
+        <?php endforeach ?>
+    </form>
 </body>
 
 </html>
