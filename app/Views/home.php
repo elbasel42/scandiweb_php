@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <body>
+
     <h1>Homepage</h1>
 
     <a href="/product/add">Add Product</a>
@@ -17,5 +17,5 @@
         <?php endforeach ?>
     </form>
 </body>
-
+<link href="{{ asset('home.css')}}" rel="stylesheet">
 </html>

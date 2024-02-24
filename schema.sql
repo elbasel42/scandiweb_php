@@ -6,5 +6,8 @@ CREATE TABLE IF NOT EXISTS products (
     product_type varchar(255) NOT NULL,
     weight decimal(12, 6),
     size decimal(12, 6),
+    length decimal(12, 6),
+    height decimal(12, 6),
+    width decimal(12, 6),
     PRIMARY KEY (id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1;

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Product;
-use mysqli;
+use App\Utils\Helper;
 
 class Book extends Product
 {
@@ -29,10 +29,10 @@ class Book extends Product
     public function render()
 
     {
-        $weight = $this->getWeight();
+        $weight = Helper::removeZeros($this->getWeight());
         $initialRender = parent::render();
 
-        return "{$initialRender}<li>{$weight}</li>";
+        return "{$initialRender}<li>{$weight}KG</li>";
     }
 
     // public static function store($data)

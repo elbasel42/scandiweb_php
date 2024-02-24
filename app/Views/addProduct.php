@@ -14,7 +14,7 @@
         </div>
         <div>
             <label for="price">Price:</label>
-            <input type="number" name="price" id="price">
+            <input step="any" type="number" name="price" id="price">
         </div>
         <div>
             <label for="type">Type:</label>
@@ -33,13 +33,13 @@
             <!-- Fields for disc -->
             <div hidden id="disc-input">
                 <label for="size">Size:</label>
-                <input type="text" name="size" placeholder="Size">
+                <input type="text" name="size">
             </div>
             <!-- Fields for furniture -->
             <div hidden id="furniture-input">
                 <div>
                     <label for="height">Height:</label>
-                    <input type="text" name="height" placeholder="Height">
+                    <input type="text" name="height">
                 </div>
                 <div>
                     <label for="width">Width:</label>

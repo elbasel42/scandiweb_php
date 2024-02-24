@@ -22,13 +22,20 @@ class ProductController
             $title = $_POST['title'];
             $price = $_POST['price'];
             $weight = $_POST['weight'] ?? Null;
+            $length = $_POST['length'] ?? Null;
             $height = $_POST['height'] ?? Null;
+            $width = $_POST['width'] ?? Null;
+            $size = $_POST['size'] ?? Null;
             Product::store([
                 'sku' => $sku,
                 'title' => $title,
-                'price' => 2,
-                'weight' => 5,
-                'product_type' => $productType
+                'price' => $price,
+                'product_type' => $productType,
+                'weight' => (float)$weight,
+                'length' => (float)$length,
+                'height' => (float)$height,
+                'width' => (float)$width,
+                'size' => (float)$size
             ]);
             // echo "saved";
             // sleep(3);

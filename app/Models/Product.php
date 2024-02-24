@@ -13,7 +13,7 @@ class Product
 
     public function render()
     {
-        return "<li class='product-id'>{$this->getId()}</li><li>{$this->getSku()}</li><li>{$this->getTitle()}</li><li>{$this->getPrice()}</li>";
+        return "<li class='product-id' hidden>{$this->getId()}</li><li>{$this->getSku()}</li><li>{$this->getTitle()}</li><li>{$this->getPrice()}$</li>";
     }
 
     public static function store($data)
@@ -53,6 +53,7 @@ class Product
         $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $sql = "DELETE FROM products WHERE id = ?";
         $connection->execute_query($sql, [$id]);
+        $connection->close();
     }
 
     // GET METHODS
@@ -76,7 +77,6 @@ class Product
     {
         return $this->sku;
     }
-
 
     // SET METHODS
     public function setTitle(string $title)
