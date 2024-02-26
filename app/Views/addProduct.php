@@ -2,16 +2,17 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="../shared.css">
     <link rel="stylesheet" href="index.css">
     <script src="index.js" defer></script>
 </head>
 
 <body>
     <form action="/product/add" method="post">
-        <div class="buttons-containers">
+        <div class="buttons-container">
             <h1>Product Add</h1>
-            <a href="/">Cancel</a>
-            <button>Save</button>
+            <a href="/" class="app-button">Cancel</a>
+            <button class="app-button">Save</button>
         </div>
         <div>
             <label for="sku">Sku:</label>
@@ -37,26 +38,26 @@
             <!-- Fields for book -->
             <div id="book-input">
                 <label for="weight">Weight:</label>
-                <input type="text" name="weight">
+                <input type="number" step="any" name="weight">
             </div>
             <!-- Fields for disc -->
             <div hidden id="disc-input">
                 <label for="size">Size:</label>
-                <input type="text" name="size">
+                <input type="number" step="any" name="size">
             </div>
             <!-- Fields for furniture -->
             <div hidden id="furniture-input">
                 <div>
                     <label for="height">Height:</label>
-                    <input type="text" name="height">
+                    <input type="number" step="any" name="height">
                 </div>
                 <div>
                     <label for="width">Width:</label>
-                    <input type="text" name="width">
+                    <input type="number" step="any" name="width">
                 </div>
                 <div>
                     <label for="length">Length</label>
-                    <input type="text" name="length">
+                    <input type="number" step="any" name="length">
                 </div>
             </div>
         </div>

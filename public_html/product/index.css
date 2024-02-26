@@ -1,3 +1,10 @@
 .buttons-container {
-    display: flex;
+  display: flex;
+  padding-block: .5rem;
+  padding-inline: .3rem;
 }
+
+h1 {
+  margin-right: auto;
+}
+
