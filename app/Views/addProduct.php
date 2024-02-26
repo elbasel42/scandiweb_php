@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
 
 <body>
     <form action="/product/add" method="post">
+        <div class="buttons-containers">
+            <h1>Product Add</h1>
+            <a href="/">Cancel</a>
+            <button>Save</button>
+        </div>
         <div>
             <label for="sku">Sku:</label>
             <input type="text" name="sku" id="sku">
@@ -43,40 +52,18 @@
                 </div>
                 <div>
                     <label for="width">Width:</label>
-                    <input type="text" name="width" placeholder="Width">
+                    <input type="text" name="width">
                 </div>
                 <div>
                     <label for="length">Length</label>
-                    <input type="text" name="length" placeholder="Length">
+                    <input type="text" name="length">
                 </div>
             </div>
         </div>
-        <button>add</button>
     </form>
-    <script>
-        const typeSwitcher = document.getElementById("type");
-        const bookInput = document.getElementById('book-input')
-        const discInput = document.getElementById('disc-input')
-        const furnitureInput = document.getElementById('furniture-input')
-
-        typeSwitcher.addEventListener('change', function() {
-            const selectedValue = this.value;
-            bookInput.hidden = true;
-            discInput.hidden = true;
-            furnitureInput.hidden = true;
-            switch (selectedValue) {
-                case 'Book':
-                    bookInput.hidden = false;
-                    break;
-                case 'Disc':
-                    discInput.hidden = false;
-                    break;
-                case 'Furniture':
-                    furnitureInput.hidden = false;
-                    break;
-            }
-        })
-    </script>
+    <div class="error">
+        <?= $error ?>
+    </div>
 </body>
 
 </html>

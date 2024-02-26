@@ -70,7 +70,7 @@ class Router
         }
 
         // Read and output the contents of the asset file
-        readfile('../public_html' . $assetPath);
+        readfile(APP_ROOT . '/public_html//'.  $assetPath);
     }
 }
 

@@ -12,22 +12,63 @@ class ProductController
     {
         $request_method = $_SERVER['REQUEST_METHOD'];
         if ($request_method === "GET") {
+
             $error = $_GET['error'] ?? Null;
-            require_once APP_ROOT . '/Views/addProduct.php';
+            require_once APP_ROOT . '/app/Views/addProduct.php';
         } elseif ($request_method === "POST") {
-            $productType = $_POST['product_type'];
-            $sku = $_POST['sku'];
-            $title = $_POST['title'];
-            $price = $_POST['price'];
-            $weight = $_POST['weight'];
-            $length = $_POST['length'];
-            $height = $_POST['height'];
-            $width = $_POST['width'];
+
+            //* Handle add product, get all POST data
+            $sku = $_POST['sku'] ?? Null;
+            $title = $_POST['title'] ?? Null;
+            $price = $_POST['price'] ?? Null;
+            $productType = $_POST['product_type'] ?? Null;
+            $weight = $_POST['weight'] ?? Null;
+            $length = $_POST['length'] ?? Null;
+            $height = $_POST['height'] ?? Null;
+            $width = $_POST['width'] ?? Null;
             $size = $_POST['size'] ?? Null;
+
+            //! Validation
+            $error = Null;
+            //* Valid product type
             if (!in_array($productType, ['Book', 'Disc', 'Furniture'])) {
-                header('Location: ' . '/product/add?error=invalid%20product%20type');
+                $error = 'Invalid Product Type';
+            }
+
+            //* Required attributes
+            if ($sku === Null || $title === Null || $price === Null) {
+                $error = "Missing data";
+            }
+
+            //* price must be numeric
+            if (!is_numeric($price)) {
+                $error = "Price must be numeric";
+            }
+
+            //* Valid weight if product is a book.
+            if ($productType === "Book" && ($weight === Null || !is_numeric($weight))) {
+                $error = "Invalid Wight, Must be a valid number.";
+            }
+
+            //* Valid size if the product is a disc.
+            if ($productType === 'Disc' && ($size === Null || !is_numeric($size))) {
+                $error = "Invalid Size, Must be a valid number.";
+            }
+
+            //* Valid dimensions if product is a piece of furniture.
+            if ($productType === "Furniture" && (($length === Null || !is_numeric($length) || ($width === Null || !is_numeric($width)) || ($height === Null || !is_numeric($height))))) {
+                $error = "Invalid Dimensions, Must be valid numbers";
+            }
+
+
+            //* If error, stop execution and redirect back 
+            //* to product add page with an error message.
+            if ($error !== Null) {
+                header('Location: ' . '/product/add?error=' . urlencode($error));
                 die();
             }
+
+            //* If no errors,store the product in the database.
             Product::store([
                 'sku' => $sku,
                 'title' => $title,

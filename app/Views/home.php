@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 
-<link rel="stylesheet" href="styles/reset.css">
-<link rel="stylesheet" href="styles/home.css" />
+<head>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="index.css" />
+</head>
 
 <body>
     <form action="/product/delete" method="POST">

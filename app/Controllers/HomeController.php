@@ -11,6 +11,6 @@ class HomeController
     public function index()
     {
         $allProducts = Product::getAllProducts();
-        require_once APP_ROOT . '/Views/home.php';
+        require_once APP_ROOT . '/app/Views/home.php';
     }
 }
