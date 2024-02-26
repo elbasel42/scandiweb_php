@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form action="/product/add" method="post">
+    <form action="/product/add" method="post" id="product-form">
         <div class="buttons-container">
             <h1>Product Add</h1>
             <a href="/" class="app-button">Cancel</a>
@@ -29,10 +29,10 @@
         </div>
         <div class="input-group">
             <label for="type">Type:</label>
-            <select required name="product_type" id="product-type">
+            <select required name="product_type" id="productType">
                 <option value="Book" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'Book') ? 'selected="selected"' : ''; ?>>Book</option>
                 <option value="Furniture" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'Furniture') ? 'selected="selected"' : ''; ?>">Furniture</option>
-                <option value="Disc" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'Disc') ? 'selected="selected"' : ''; ?>>Disc</option>
+                <option value="DVD" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'DVD') ? 'selected="selected"' : ''; ?>>DVD</option>
             </select>
         </div>
         <div id="additional-fields">
@@ -41,8 +41,8 @@
                 <label for="weight">Weight:</label>
                 <input type="number" step="any" name="weight" value="<?= htmlspecialchars($_SESSION['weight'] ?? '') ?>">
             </div>
-            <!-- Fields for disc -->
-            <div id="disc-input" class="input-group hidden">
+            <!-- Fields for DVD -->
+            <div id="dvd-input" class="input-group hidden">
                 <label for="size">Size:</label>
                 <input type="number" step="any" name="size" value="<?= htmlspecialchars($_SESSION['size'] ?? '') ?>">
             </div>

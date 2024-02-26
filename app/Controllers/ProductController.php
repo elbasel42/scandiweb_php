@@ -41,7 +41,7 @@ class ProductController
             //! Validation
             $error = Null;
             //* Valid product type
-            if (!in_array($productType, ['Book', 'Disc', 'Furniture'])) {
+            if (!in_array($productType, ['Book', 'DVD', 'Furniture'])) {
                 $error = 'Invalid Product Type';
             }
 
@@ -60,8 +60,8 @@ class ProductController
                 $error = "Weight must be a valid number.";
             }
 
-            //* Valid size if the product is a disc.
-            if ($productType === 'Disc' && ($size === Null || !is_numeric($size))) {
+            //* Valid size if the product is a DVD.
+            if ($productType === 'DVD' && ($size === Null || !is_numeric($size))) {
                 $error = "Size must be a valid number.";
             }
 

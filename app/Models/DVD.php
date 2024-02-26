@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Product;
 
-class Disc extends Product
+class DVD extends Product
 {
     protected $size;
 
