@@ -15,7 +15,6 @@ class Router
     public function __invoke(RouteCollection $routes)
     {
         $context = new RequestContext();
-        $request = Request::createFromGlobals();
         $context->fromRequest(Request::createFromGlobals());
 
         // Get the requested URL path
@@ -75,7 +74,7 @@ class Router
         }
 
         // Read and output the contents of the asset file
-        readfile('../public' . $assetPath);
+        readfile('../public_html' . $assetPath);
     }
 }
 

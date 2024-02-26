@@ -16,16 +16,18 @@ class ProductController
             require_once APP_ROOT . '/Views/addProduct.php';
         } elseif ($request_method === "POST") {
             $productType = $_POST['product_type'];
-            // $className = '\\App\\Models\\' . $productType;
-            // $className::create([
             $sku = $_POST['sku'];
             $title = $_POST['title'];
             $price = $_POST['price'];
-            $weight = $_POST['weight'] ?? Null;
-            $length = $_POST['length'] ?? Null;
-            $height = $_POST['height'] ?? Null;
-            $width = $_POST['width'] ?? Null;
+            $weight = $_POST['weight'];
+            $length = $_POST['length'];
+            $height = $_POST['height'];
+            $width = $_POST['width'];
             $size = $_POST['size'] ?? Null;
+            if ($size === Null) {
+                header('Location: ' . '/product/add?error="invalid size"');
+                die();
+            }
             Product::store([
                 'sku' => $sku,
                 'title' => $title,
@@ -37,19 +39,12 @@ class ProductController
                 'width' => (float)$width,
                 'size' => (float)$size
             ]);
-            // echo "saved";
-            // sleep(3);
             header('Location: ' . '/');
-            // die();
         }
     }
 
     function delete()
     {
-        // use post via javascript;
-        // $ids_to_delete = $_POST['delete'];
-        // var_dump($ids_to_delete);
-        // var_dump($_POST);
         foreach ($_POST as $id => $value) {
 
             Product::delete($id);
