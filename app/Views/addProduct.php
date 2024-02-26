@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 
@@ -16,48 +17,48 @@
         </div>
         <div class="input-group">
             <label for="sku">Sku:</label>
-            <input required type="text" name="sku" id="sku">
+            <input required type="text" name="sku" id="sku" value="<?= htmlspecialchars($_SESSION['sku'] ?? '') ?>">
         </div>
         <div class="input-group">
             <label for="name">Name:</label>
-            <input required type="text" name="title" id="name">
+            <input required type="text" name="title" id="name" value="<?= htmlspecialchars($_SESSION['title'] ?? '') ?>">
         </div>
         <div class="input-group">
             <label for="price">Price:</label>
-            <input required step="any" type="number" name="price" id="price">
+            <input required step="any" type="number" name="price" id="price" value="<?= htmlspecialchars($_SESSION['price'] ?? '') ?>">
         </div>
         <div class="input-group">
             <label for="type">Type:</label>
             <select required name="product_type" id="product-type">
-                <option selected="selected" value="Book">Book</option>
-                <option value="Furniture">Furniture</option>
-                <option value="Disc">Disc</option>
+                <option value="Book" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'Book') ? 'selected="selected"' : ''; ?>>Book</option>
+                <option value="Furniture" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'Furniture') ? 'selected="selected"' : ''; ?>">Furniture</option>
+                <option value="Disc" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'Disc') ? 'selected="selected"' : ''; ?>>Disc</option>
             </select>
         </div>
         <div id="additional-fields">
             <!-- Fields for book -->
             <div id="book-input" class="input-group">
                 <label for="weight">Weight:</label>
-                <input type="number" step="any" name="weight">
+                <input type="number" step="any" name="weight" value="<?= htmlspecialchars($_SESSION['weight'] ?? '') ?>">
             </div>
             <!-- Fields for disc -->
             <div id="disc-input" class="input-group hidden">
                 <label for="size">Size:</label>
-                <input type="number" step="any" name="size">
+                <input type="number" step="any" name="size" value="<?= htmlspecialchars($_SESSION['size'] ?? '') ?>">
             </div>
             <!-- Fields for furniture -->
             <div id="furniture-input" class="hidden">
                 <div class="input-group">
                     <label for="height">Height:</label>
-                    <input type="number" step="any" name="height">
+                    <input type="number" step="any" name="height" value="<?= htmlspecialchars($_SESSION['height'] ?? '') ?>">
                 </div>
                 <div class="input-group">
                     <label for="width">Width:</label>
-                    <input type="number" step="any" name="width">
+                    <input type="number" step="any" name="width" value="<?= htmlspecialchars($_SESSION['width'] ?? '') ?>">
                 </div>
                 <div class="input-group">
                     <label for="length">Length</label>
-                    <input type="number" step="any" name="length">
+                    <input type="number" step="any" name="length" value="<?= htmlspecialchars($_SESSION['length'] ?? '') ?>">
                 </div>
             </div>
         </div>
