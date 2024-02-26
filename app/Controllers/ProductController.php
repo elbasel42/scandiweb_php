@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\Product;
-// use Symfony\Component\Routing\RouteCollection;
 
 class ProductController
 {
@@ -13,6 +12,7 @@ class ProductController
     {
         $request_method = $_SERVER['REQUEST_METHOD'];
         if ($request_method === "GET") {
+            $error = $_GET['error'] ?? Null;
             require_once APP_ROOT . '/Views/addProduct.php';
         } elseif ($request_method === "POST") {
             $productType = $_POST['product_type'];
@@ -24,8 +24,8 @@ class ProductController
             $height = $_POST['height'];
             $width = $_POST['width'];
             $size = $_POST['size'] ?? Null;
-            if ($size === Null) {
-                header('Location: ' . '/product/add?error="invalid size"');
+            if (!in_array($productType, ['Book', 'Disc', 'Furniture'])) {
+                header('Location: ' . '/product/add?error=invalid%20product%20type');
                 die();
             }
             Product::store([

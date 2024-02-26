@@ -16,8 +16,6 @@ class Router
     {
         $context = new RequestContext();
         $context->fromRequest(Request::createFromGlobals());
-
-        // Get the requested URL path
         $requestedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
         // Check if the requested URL points to an asset file
@@ -27,14 +25,12 @@ class Router
             return;
         }
 
-        // Routing can match routes with incoming requests
         $matcher = new UrlMatcher($routes, $context);
         try {
-            $matches = $matcher->match($_SERVER['REQUEST_URI']);
-
+            $arrayUri = explode('?', $requestedUrl);
+            $matches = $matcher->match($arrayUri[0]);
             $className = '\\App\\Controllers\\' . $matches['controller'];
             $classInstance = new $className();
-
             call_user_func_array(array($classInstance, $matches['method']), []);
         } catch (MethodNotAllowedException $e) {
             echo 'Route method is not allowed.';
