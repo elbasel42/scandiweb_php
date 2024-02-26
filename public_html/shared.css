@@ -77,6 +77,8 @@ select {
 
 /*! Global Classes */
 .app-button {
+  flex: 1;
+  max-width: 100px;
   display: flex;
   align-items: center;
   justify-content: center;

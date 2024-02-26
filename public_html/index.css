@@ -3,6 +3,10 @@ h1 {
   margin-right: auto;
 }
 
+form {
+  padding-inline: 0.3rem;
+}
+
 .products-container {
   gap: 1rem;
   display: grid;

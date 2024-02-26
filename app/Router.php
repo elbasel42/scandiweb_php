@@ -73,7 +73,6 @@ class Router
         readfile(APP_ROOT . '/public_html//'.  $assetPath);
     }
 }
-
 // Invoke
 $router = new Router();
 $router($routes);

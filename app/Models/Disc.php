@@ -15,7 +15,6 @@ class Disc extends Product
         $title = $data['title'];
         $price = $data['price'];
         $size = $data['size'];
-
         parent::__construct($id, $sku, $title, $price);
         $this->size = $size;
     }
@@ -30,7 +29,6 @@ class Disc extends Product
     {
         $size = $this->getSize();
         $initialRender = parent::render();
-
         return "{$initialRender}<li>Size: {$size}MB</li>";
     }
 }

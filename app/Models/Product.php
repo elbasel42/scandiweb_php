@@ -7,7 +7,6 @@ use mysqli;
 class Product
 {
     public function __construct(protected int $id, protected string $sku, protected string $title, protected float $price)
-
     {
     }
 

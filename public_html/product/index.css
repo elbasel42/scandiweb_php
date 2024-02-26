@@ -6,7 +6,7 @@ h1 {
   padding-inline: 0.6rem;
   margin-bottom: 0.3rem;
   display: flex;
-  width: 50%;
+  width: 20%;
 }
 
 .input-group label {
@@ -17,4 +17,10 @@ h1 {
 select {
   display: block;
   width: 70%;
+}
+
+.error {
+  font-style: italic;
+  color: red;
+  padding-inline: 0.3rem;
 }

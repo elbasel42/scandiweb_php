@@ -1,8 +1,6 @@
 <?php
-//App Root
-// define('APP_ROOT', dirname(dirname(__FILE__)));
-define('APP_ROOT', "/var/www/html");
-define('URL_ROOT', '/');
+define('APP_ROOT', dirname(dirname(__FILE__)));
+// define('APP_ROOT', "/var/www/html");
 
 //DB Params
 define('DB_HOST', 'database');

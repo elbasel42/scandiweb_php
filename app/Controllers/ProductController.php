@@ -6,8 +6,6 @@ use App\Models\Product;
 
 class ProductController
 {
-    // Show the product attributes based on the id.
-    // public function showAction(int $id, RouteCollection $routes)
     public function add()
     {
         $request_method = $_SERVER['REQUEST_METHOD'];
@@ -37,7 +35,7 @@ class ProductController
 
             //* Required attributes
             if ($sku === Null || $title === Null || $price === Null) {
-                $error = "Missing data";
+                $error = "Missing data, please check that all fields are filled.";
             }
 
             //* price must be numeric
@@ -47,19 +45,18 @@ class ProductController
 
             //* Valid weight if product is a book.
             if ($productType === "Book" && ($weight === Null || !is_numeric($weight))) {
-                $error = "Invalid Wight, Must be a valid number.";
+                $error = "Weight must be a valid number.";
             }
 
             //* Valid size if the product is a disc.
             if ($productType === 'Disc' && ($size === Null || !is_numeric($size))) {
-                $error = "Invalid Size, Must be a valid number.";
+                $error = "Size must be a valid number.";
             }
 
             //* Valid dimensions if product is a piece of furniture.
             if ($productType === "Furniture" && (($length === Null || !is_numeric($length) || ($width === Null || !is_numeric($width)) || ($height === Null || !is_numeric($height))))) {
-                $error = "Invalid Dimensions, Must be valid numbers";
+                $error = "Dimensions must be valid numbers";
             }
-
 
             //* If error, stop execution and redirect back 
             //* to product add page with an error message.
@@ -72,13 +69,14 @@ class ProductController
             Product::store([
                 'sku' => $sku,
                 'title' => $title,
-                'price' => $price,
                 'product_type' => $productType,
+                // convert numeric string to float
+                'price' => (float)$price,
                 'weight' => (float)$weight,
                 'length' => (float)$length,
                 'height' => (float)$height,
                 'width' => (float)$width,
-                'size' => (float)$size
+                'size' => (float) $size
             ]);
             header('Location: ' . '/');
         }

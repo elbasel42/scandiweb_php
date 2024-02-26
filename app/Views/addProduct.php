@@ -38,26 +38,26 @@
             <!-- Fields for book -->
             <div id="book-input" class="input-group">
                 <label for="weight">Weight:</label>
-                <input required type="number" step="any" name="weight">
+                <input type="number" step="any" name="weight">
             </div>
             <!-- Fields for disc -->
             <div id="disc-input" class="input-group hidden">
                 <label for="size">Size:</label>
-                <input required type="number" step="any" name="size">
+                <input type="number" step="any" name="size">
             </div>
             <!-- Fields for furniture -->
             <div id="furniture-input" class="hidden">
                 <div class="input-group">
                     <label for="height">Height:</label>
-                    <input required type="number" step="any" name="height">
+                    <input type="number" step="any" name="height">
                 </div>
                 <div class="input-group">
                     <label for="width">Width:</label>
-                    <input required type="number" step="any" name="width">
+                    <input type="number" step="any" name="width">
                 </div>
                 <div class="input-group">
                     <label for="length">Length</label>
-                    <input required type="number" step="any" name="length">
+                    <input type="number" step="any" name="length">
                 </div>
             </div>
         </div>
