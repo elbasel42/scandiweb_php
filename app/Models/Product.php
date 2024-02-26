@@ -13,7 +13,7 @@ class Product
 
     public function render()
     {
-        return "<li class='product-id' hidden>{$this->getId()}</li><li>{$this->getSku()}</li><li>{$this->getTitle()}</li><li>{$this->getPrice()}$</li>";
+        return "<li class='product-id'>{$this->getId()}</li><li>{$this->getSku()}</li><li>{$this->getTitle()}</li><li>{$this->getPrice()}$</li>";
     }
 
     public static function store($data)

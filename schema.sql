@@ -1,13 +1,12 @@
 CREATE TABLE IF NOT EXISTS products (
-    id int NOT NULL auto_increment,
-    title varchar(255) NOT NULL,
-    price decimal(12, 5) NOT NULL,
-    sku varchar(255) NOT NULL,
-    product_type varchar(255) NOT NULL,
-    weight decimal(12, 6),
-    size decimal(12, 6),
-    length decimal(12, 6),
-    height decimal(12, 6),
-    width decimal(12, 6),
-    PRIMARY KEY (id)
-) ENGINE = InnoDB AUTO_INCREMENT = 1;
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    price FLOAT NOT NULL,
+    sku VARCHAR(255) NOT NULL,
+    product_type VARCHAR(255) NOT NULL,
+    weight FLOAT,
+    size FLOAT,
+    length FLOAT,
+    height FLOAT,
+    width FLOAT
+) ENGINE = InnoDB;

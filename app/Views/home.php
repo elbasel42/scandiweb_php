@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
+
+<link rel="stylesheet" href="styles/reset.css">
+<link rel="stylesheet" href="styles/home.css" />
+
 <body>
-
-    <h1>Homepage</h1>
-
-    <a href="/product/add">Add Product</a>
     <form action="/product/delete" method="POST">
-        <button>Mass Delete</button>
-        <?php foreach ($allProducts as $product) : ?>
-            <div>
-                <input type="checkbox" name="<?= $product->getId() ?>" id="<?= $product->getId() ?>">
-                <ul class="product">
-                    <?= $product->render(); ?>
-                </ul>
-            </div>
-        <?php endforeach ?>
+        <header>
+            <h1>Product List</h1>
+            <a class="header-button" href="/product/add">Add Product</a>
+            <button class="header-button">Mass Delete</button>
+        </header>
+        <div class="products-container">
+            <?php foreach ($allProducts as $product) : ?>
+                <div class="product">
+                    <div class="checkbox-container">
+                        <input type="checkbox" name="<?= $product->getId() ?>" id="<?= $product->getId() ?>">
+                    </div>
+                    <ul>
+                        <?= $product->render(); ?>
+                    </ul>
+                </div>
+            <?php endforeach ?>
+        </div>
     </form>
 </body>
-<link href="{{ asset('home.css')}}" rel="stylesheet">
+
 </html>

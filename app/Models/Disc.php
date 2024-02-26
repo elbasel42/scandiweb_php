@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Product;
-use App\Utils\Helper;
 
 class Disc extends Product
 {
@@ -29,7 +28,7 @@ class Disc extends Product
     public function render()
 
     {
-        $size = Helper::removeZeros($this->getSize());
+        $size = $this->getSize();
         $initialRender = parent::render();
 
         return "{$initialRender}<li>Size: {$size}MB</li>";

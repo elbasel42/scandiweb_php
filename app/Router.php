@@ -18,34 +18,64 @@ class Router
         $request = Request::createFromGlobals();
         $context->fromRequest(Request::createFromGlobals());
 
+        // Get the requested URL path
+        $requestedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+        // Check if the requested URL points to an asset file
+        if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js|ico)$/', $requestedUrl)) {
+            // Serve the asset file directly
+            $this->serveAsset($requestedUrl);
+            return;
+        }
+
         // Routing can match routes with incoming requests
         $matcher = new UrlMatcher($routes, $context);
         try {
-            // $matches = $matcher->match(str_replace($_SERVER['REQUEST_URI'], "?", ""));
             $matches = $matcher->match($_SERVER['REQUEST_URI']);
-
-            // Cast params to int if numeric
-            // array_walk($matcher, function (&$param) {
-            // if (is_numeric($param)) {
-            // $param = (int) $param;
-            // }
-            // });
 
             $className = '\\App\\Controllers\\' . $matches['controller'];
             $classInstance = new $className();
 
-            // Add routes as paramaters to the next class
-            // $params = array_merge(array_slice($matcher, 2, -1), array('routes' => $routes));
-
-            // call_user_func_array(array($classInstance, $matcher['method']), $params);
             call_user_func_array(array($classInstance, $matches['method']), []);
         } catch (MethodNotAllowedException $e) {
             echo 'Route method is not allowed.';
         } catch (ResourceNotFoundException $e) {
-            echo 'Route does not exists.';
+            echo 'Route does not exist.';
         } catch (NoConfigurationException $e) {
-            echo 'Configuration does not exists.';
+            echo 'Configuration does not exist.';
         }
+    }
+
+    private function serveAsset($assetPath)
+    {
+        // Set the appropriate Content-Type header based on the file extension
+        $extension = pathinfo($assetPath, PATHINFO_EXTENSION);
+        switch ($extension) {
+            case 'png':
+                header('Content-Type: image/png');
+                break;
+            case 'jpg':
+            case 'jpeg':
+                header('Content-Type: image/jpeg');
+                break;
+            case 'gif':
+                header('Content-Type: image/gif');
+                break;
+            case 'css':
+                header('Content-Type: text/css');
+                break;
+            case 'js':
+                header('Content-Type: application/javascript');
+                break;
+            case 'ico':
+                header('Content-Type: image/x-icon');
+                break;
+            default:
+                header('Content-Type: application/octet-stream');
+        }
+
+        // Read and output the contents of the asset file
+        readfile('../public' . $assetPath);
     }
 }
 

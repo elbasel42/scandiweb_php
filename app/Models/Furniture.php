@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Product;
-use App\Utils\Helper;
 
 class Furniture extends Product
 {
@@ -45,11 +44,11 @@ class Furniture extends Product
     public function render()
 
     {
-        $height = Helper::removeZeros($this->getHeight());
-        $length = Helper::removeZeros($this->getLength());
-        $width = Helper::removeZeros($this->getWidth());
+        $height = $this->getHeight();
+        $length = $this->getLength();
+        $width = $this->getWidth();
         $initialRender = parent::render();
 
-        return "{$initialRender}<li>Dimensions:{$length}x{$width}x{$height}</li>";
+        return "{$initialRender}<li>Dimensions: {$length}x{$width}x{$height}</li>";
     }
 }
