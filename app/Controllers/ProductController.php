@@ -29,7 +29,7 @@ class ProductController
             //* Save input data in case of redirect because of an error.
             session_start();
             $_SESSION['sku'] = $sku;
-            $_SESSION['title'] = $title; 
+            $_SESSION['title'] = $title;
             $_SESSION['price'] = $price;
             $_SESSION['product_type'] = $productType;
             $_SESSION['weight'] = $weight;
@@ -76,22 +76,30 @@ class ProductController
                 header('Location: ' . '/product/add?error=' . urlencode($error));
                 die();
             }
-            
+
             //* If no errors,store the product in the database.
             //* And destroy session variables
+            try {
+                Product::store([
+                    'sku' => $sku,
+                    'title' => $title,
+                    'product_type' => $productType,
+                    // convert numeric string to float
+                    'price' => (float)$price,
+                    'weight' => (float)$weight,
+                    'length' => (float)$length,
+                    'height' => (float)$height,
+                    'width' => (float)$width,
+                    'size' => (float) $size
+                ]);
+            } catch (\Throwable $th) {
+                $errorCode =  $th->getCode();
+                if ($errorCode === 1062) {
+                    header('Location: ' . '/product/add?error=' . urlencode("Sku already in database, please try another one"));
+                    die();
+                }
+            }
             session_destroy();
-            Product::store([
-                'sku' => $sku,
-                'title' => $title,
-                'product_type' => $productType,
-                // convert numeric string to float
-                'price' => (float)$price,
-                'weight' => (float)$weight,
-                'length' => (float)$length,
-                'height' => (float)$height,
-                'width' => (float)$width,
-                'size' => (float) $size
-            ]);
             header('Location: ' . '/');
         }
     }
