@@ -2,17 +2,17 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="index.css" />
 </head>
 
 <body>
     <form action="/product/delete" method="POST">
-        <header>
+        <div class="buttons-container">
             <h1>Product List</h1>
-            <a class="header-button" href="/product/add">Add Product</a>
-            <button class="header-button">Mass Delete</button>
-        </header>
+            <a class="app-button" href="/product/add">Add Product</a>
+            <button class="app-button">Mass Delete</button>
+        </div>
         <div class="products-container">
             <?php foreach ($allProducts as $product) : ?>
                 <div class="product">

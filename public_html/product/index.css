@@ -1,10 +1,20 @@
-.buttons-container {
-  display: flex;
-  padding-block: .5rem;
-  padding-inline: .3rem;
-}
-
 h1 {
   margin-right: auto;
 }
 
+.input-group {
+  padding-inline: 0.6rem;
+  margin-bottom: 0.3rem;
+  display: flex;
+  width: 50%;
+}
+
+.input-group label {
+  margin-right: auto;
+}
+
+.input-group input,
+select {
+  display: block;
+  width: 70%;
+}

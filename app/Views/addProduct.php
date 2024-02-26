@@ -14,21 +14,21 @@
             <a href="/" class="app-button">Cancel</a>
             <button class="app-button">Save</button>
         </div>
-        <div>
+        <div class="input-group">
             <label for="sku">Sku:</label>
-            <input type="text" name="sku" id="sku">
+            <input required type="text" name="sku" id="sku">
         </div>
-        <div>
+        <div class="input-group">
             <label for="name">Name:</label>
-            <input type="text" name="title" id="name">
+            <input required type="text" name="title" id="name">
         </div>
-        <div>
+        <div class="input-group">
             <label for="price">Price:</label>
-            <input step="any" type="number" name="price" id="price">
+            <input required step="any" type="number" name="price" id="price">
         </div>
-        <div>
+        <div class="input-group">
             <label for="type">Type:</label>
-            <select name="product_type" id="type">
+            <select required name="product_type" id="product-type">
                 <option selected="selected" value="Book">Book</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Disc">Disc</option>
@@ -36,28 +36,28 @@
         </div>
         <div id="additional-fields">
             <!-- Fields for book -->
-            <div id="book-input">
+            <div id="book-input" class="input-group">
                 <label for="weight">Weight:</label>
-                <input type="number" step="any" name="weight">
+                <input required type="number" step="any" name="weight">
             </div>
             <!-- Fields for disc -->
-            <div hidden id="disc-input">
+            <div id="disc-input" class="input-group hidden">
                 <label for="size">Size:</label>
-                <input type="number" step="any" name="size">
+                <input required type="number" step="any" name="size">
             </div>
             <!-- Fields for furniture -->
-            <div hidden id="furniture-input">
-                <div>
+            <div id="furniture-input" class="hidden">
+                <div class="input-group">
                     <label for="height">Height:</label>
-                    <input type="number" step="any" name="height">
+                    <input required type="number" step="any" name="height">
                 </div>
-                <div>
+                <div class="input-group">
                     <label for="width">Width:</label>
-                    <input type="number" step="any" name="width">
+                    <input required type="number" step="any" name="width">
                 </div>
-                <div>
+                <div class="input-group">
                     <label for="length">Length</label>
-                    <input type="number" step="any" name="length">
+                    <input required type="number" step="any" name="length">
                 </div>
             </div>
         </div>

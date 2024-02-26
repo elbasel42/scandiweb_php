@@ -1,22 +1,23 @@
-const typeSwitcher = document.getElementById("type");
+const typeSwitcher = document.getElementById("product-type");
 const bookInput = document.getElementById("book-input");
 const discInput = document.getElementById("disc-input");
 const furnitureInput = document.getElementById("furniture-input");
 
 typeSwitcher.addEventListener("change", function () {
   const selectedValue = this.value;
-  bookInput.hidden = true;
-  discInput.hidden = true;
-  furnitureInput.hidden = true;
+  const defaultClassName = "hidden";
+  bookInput.className = defaultClassName;
+  discInput.className = defaultClassName;
+  furnitureInput.className = defaultClassName;
   switch (selectedValue) {
     case "Book":
-      bookInput.hidden = false;
+      bookInput.className = "input-group";
       break;
     case "Disc":
-      discInput.hidden = false;
+      discInput.className = "input-group";
       break;
     case "Furniture":
-      furnitureInput.hidden = false;
+      furnitureInput.className = "";
       break;
   }
 });

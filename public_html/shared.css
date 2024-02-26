@@ -1,3 +1,4 @@
+/*! CSS Reset */
 /* Box sizing rules */
 *,
 *::before,
@@ -74,7 +75,7 @@ select {
   }
 }
 
-/* Common classes */
+/*! Global Classes */
 .app-button {
   display: flex;
   align-items: center;
@@ -92,11 +93,22 @@ select {
   transition: color 0.2s;
 }
 
-header .header-button:hover {
+.app-button:hover {
   background-color: black;
   color: white;
 }
 
-header .header-button:active {
+.app-button.header-button:active {
   scale: 1.1;
+}
+
+.buttons-container {
+  display: flex;
+  padding-block: 0.5rem;
+  margin-bottom: 1.2rem;
+  padding-inline: 0.3rem;
+}
+
+.hidden {
+  display: none !important;
 }
