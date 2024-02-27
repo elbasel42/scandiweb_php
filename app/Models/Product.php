@@ -37,7 +37,6 @@ class Product
         $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $sql = "SELECT * from products";
         $rows = $connection->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
-
         foreach ($rows as $r) {
             $productType = $r['product_type'];
             $productClass = '\\App\\Models\\' . $productType;

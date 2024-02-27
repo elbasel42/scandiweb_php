@@ -15,6 +15,7 @@ class DVD extends Product
         $title = $data['title'];
         $price = $data['price'];
         $size = $data['size'];
+
         parent::__construct($id, $sku, $title, $price);
         $this->size = $size;
     }

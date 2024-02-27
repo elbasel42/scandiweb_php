@@ -15,6 +15,7 @@ class Book extends Product
         $title = $data['title'];
         $price = $data['price'];
         $weight = $data['weight'];
+
         parent::__construct($id, $sku, $title, $price);
         $this->weight = $weight;
     }
@@ -25,7 +26,6 @@ class Book extends Product
     }
 
     public function render()
-
     {
         $weight = $this->getWeight();
         $initialRender = parent::render();

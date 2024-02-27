@@ -13,6 +13,7 @@ class ProductController
 
             $error = $_GET['error'] ?? Null;
             require_once APP_ROOT . '/app/Views/addProduct.php';
+
         } elseif ($request_method === "POST") {
 
             //* Handle add product, get all POST data
@@ -84,7 +85,7 @@ class ProductController
                     'sku' => $sku,
                     'title' => $title,
                     'product_type' => $productType,
-                    // convert numeric string to float
+                    // convert numeric strings to floats
                     'price' => (float)$price,
                     'weight' => (float)$weight,
                     'length' => (float)$length,
@@ -94,6 +95,7 @@ class ProductController
                 ]);
             } catch (\Throwable $th) {
                 $errorCode =  $th->getCode();
+                //* check for duplicate sku in the database.
                 if ($errorCode === 1062) {
                     header('Location: ' . '/product/add?error=' . urlencode("Sku already in database, please try another one"));
                     die();
@@ -107,7 +109,6 @@ class ProductController
     function delete()
     {
         foreach ($_POST as $id => $value) {
-
             Product::delete($id);
         }
         header('Location: ' . '/');
