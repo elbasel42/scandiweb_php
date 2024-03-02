@@ -2,77 +2,88 @@
 
 namespace App;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use Symfony\Component\Routing\Exception\NoConfigurationException;
-
 class Router
 {
-    public function __invoke(RouteCollection $routes)
+    private $routes = [];
+
+    public function addRoute($route, $controller)
     {
-        $context = new RequestContext();
-        $context->fromRequest(Request::createFromGlobals());
+        $this->routes[$route] = $controller;
+    }
+
+    public function handleRequest()
+    {
         $requestedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
         // Check if the requested URL points to an asset file
         if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js|ico)$/', $requestedUrl)) {
-            // Serve the asset file directly
             $this->serveAsset($requestedUrl);
             return;
         }
 
-        $matcher = new UrlMatcher($routes, $context);
-        try {
-            $arrayUri = explode('?', $requestedUrl);
-            $matches = $matcher->match($arrayUri[0]);
-            $className = '\\App\\Controllers\\' . $matches['controller'];
-            $classInstance = new $className();
-            call_user_func_array(array($classInstance, $matches['method']), []);
-        } catch (MethodNotAllowedException $e) {
-            echo 'Route method is not allowed.';
-        } catch (ResourceNotFoundException $e) {
-            echo 'Route does not exist.';
-        } catch (NoConfigurationException $e) {
-            echo 'Configuration does not exist.';
+        if (array_key_exists($requestedUrl, $this->routes)) {
+            $controllerAction = explode('@', $this->routes[$requestedUrl]);
+            $controllerName = '\\App\\Controllers\\' . $controllerAction[0];
+            $methodName = $controllerAction[1];
+
+            if (class_exists($controllerName)) {
+                $controller = new $controllerName();
+
+                if (method_exists($controller, $methodName)) {
+                    $controller->$methodName();
+                    return;
+                }
+            }
         }
+
+        header("HTTP/1.0 404 Not Found");
+        echo 'Route not found';
     }
 
     private function serveAsset($assetPath)
     {
-        // Set the appropriate Content-Type header based on the file extension
-        $extension = pathinfo($assetPath, PATHINFO_EXTENSION);
-        switch ($extension) {
-            case 'png':
-                header('Content-Type: image/png');
-                break;
-            case 'jpg':
-            case 'jpeg':
-                header('Content-Type: image/jpeg');
-                break;
-            case 'gif':
-                header('Content-Type: image/gif');
-                break;
-            case 'css':
-                header('Content-Type: text/css');
-                break;
-            case 'js':
-                header('Content-Type: application/javascript');
-                break;
-            case 'ico':
-                header('Content-Type: image/x-icon');
-                break;
-            default:
-                header('Content-Type: application/octet-stream');
+        $filePath = APP_ROOT . '/public_html/' . $assetPath;
+
+        if (file_exists($filePath)) {
+            $extension = pathinfo($assetPath, PATHINFO_EXTENSION);
+            $contentType = $this->getContentType($extension);
+            header("Content-Type: $contentType");
+            readfile($filePath);
+            exit;
         }
 
-        // Read and output the contents of the asset file
-        readfile(APP_ROOT . '/public_html//'.  $assetPath);
+        header("HTTP/1.0 404 Not Found");
+        echo 'Asset not found';
+    }
+
+    private function getContentType($extension)
+    {
+        switch ($extension) {
+            case 'png':
+                return 'image/png';
+            case 'jpg':
+            case 'jpeg':
+                return 'image/jpeg';
+            case 'gif':
+                return 'image/gif';
+            case 'css':
+                return 'text/css';
+            case 'js':
+                return 'application/javascript';
+            case 'ico':
+                return 'image/x-icon';
+            default:
+                return 'application/octet-stream';
+        }
     }
 }
-// Invoke
+
+// Example usage:
+
 $router = new Router();
-$router($routes);
+
+$router->addRoute('/', 'HomeController@index');
+$router->addRoute('/product/add', 'ProductController@add');
+$router->addRoute('/product/delete', 'ProductController@delete');
+
+$router->handleRequest();
