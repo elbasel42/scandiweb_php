@@ -10,9 +10,5 @@
       "name": "Abdelrahman Elbasel",
       "email": "abdelrahman.elbasel42@gmail.com"
     }
-  ],
-  "require": {
-    "symfony/routing": "^7.0",
-    "symfony/http-foundation": "^7.0"
-  }
+  ]
 }
