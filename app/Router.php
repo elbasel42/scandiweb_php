@@ -78,7 +78,7 @@ class Router
     }
 }
 
-// Example usage:
+// Routes:
 
 $router = new Router();
 
