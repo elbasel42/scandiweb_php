@@ -28,6 +28,7 @@ class Furniture extends Product
 
     public static function validate($data)
     {
+        $error = Null;
         $length = $data['length'] ?? Null;
         $height = $data['height'] ?? Null;
         $width = $data['width'] ?? Null;

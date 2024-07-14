@@ -20,27 +20,26 @@ class ProductValidator
         $rows = $connection->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
         if (count($rows) === 1) {
             $error = "Sku already in database, please try another one";
+            return $error;
         }
 
         if (!is_numeric($price)) {
             $error = "Price must be numeric";
+            return $error;
         }
         if ($sku === Null || $title === Null || $price === Null) {
             $error = "Missing data, please check that all fields are filled.";
+            return $error;
         }
 
         if (!in_array($product_type, ['Book', 'DVD', 'Furniture'])) {
             $error = 'Invalid Product Type';
+            return $error;
         }
-
-        if ($error !== Null) return $error;
-
 
         //* Per type validation
         $product_class = '\\App\\Models\\' . $product_type;
         $error = $product_class::validate($data);
-
-        if ($error !== Null) return $error;
-        return Null;
+        return $error;
     }
 }
