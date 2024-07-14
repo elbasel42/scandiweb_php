@@ -41,35 +41,25 @@ class ProductController
 
             //! Validation
             $error = Null;
-            //* Valid product type
-            if (!in_array($productType, ['Book', 'DVD', 'Furniture'])) {
-                $error = 'Invalid Product Type';
+            if (!is_numeric($price)) {
+                $error = "Price must be numeric";
             }
-
-            //* Required attributes
             if ($sku === Null || $title === Null || $price === Null) {
                 $error = "Missing data, please check that all fields are filled.";
             }
 
-            //* price must be numeric
-            if (!is_numeric($price)) {
-                $error = "Price must be numeric";
-            }
-
-            //* Valid weight if product is a book.
-            if ($productType === "Book" && ($weight === Null || !is_numeric($weight))) {
-                $error = "Weight must be a valid number.";
-            }
-
-            //* Valid size if the product is a DVD.
-            if ($productType === 'DVD' && ($size === Null || !is_numeric($size))) {
-                $error = "Size must be a valid number.";
-            }
-
-            //* Valid dimensions if product is a piece of furniture.
-            if ($productType === "Furniture" && (($length === Null || !is_numeric($length) || ($width === Null || !is_numeric($width)) || ($height === Null || !is_numeric($height))))) {
-                $error = "Dimensions must be valid numbers";
-            }
+            // if (!in_array($productType, ['Book', 'DVD', 'Furniture'])) {
+                // $error = 'Invalid Product Type';
+            // }
+            // if ($productType === "Book" && ($weight === Null || !is_numeric($weight))) {
+                // $error = "Weight must be a valid number.";
+            // }
+            // if ($productType === 'DVD' && ($size === Null || !is_numeric($size))) {
+                // $error = "Size must be a valid number.";
+            // }
+            // if ($productType === "Furniture" && (($length === Null || !is_numeric($length) || ($width === Null || !is_numeric($width)) || ($height === Null || !is_numeric($height))))) {
+                // $error = "Dimensions must be valid numbers";
+            // }
 
             //* If error, stop execution and redirect back 
             //* to product add page with an error message.
