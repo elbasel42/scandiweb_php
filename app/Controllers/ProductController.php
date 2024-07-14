@@ -32,7 +32,7 @@ class ProductController
             $_SESSION['sku'] = $sku;
             $_SESSION['title'] = $title;
             $_SESSION['price'] = $price;
-            $_SESSION['product_type'] = $productType;
+            // $_SESSION['product_type'] = $productType;
             $_SESSION['weight'] = $weight;
             $_SESSION['length'] = $length;
             $_SESSION['height'] = $height;

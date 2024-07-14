@@ -30,9 +30,9 @@
         <div class="input-group">
             <label for="type">Type:</label>
             <select required name="product_type" id="productType">
-                <option value="Book" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'Book') ? 'selected="selected"' : ''; ?>>Book</option>
-                <option value="Furniture" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'Furniture') ? 'selected="selected"' : ''; ?>">Furniture</option>
-                <option value="DVD" <?= (isset($_SESSION['product_type']) && $_SESSION['product_type'] === 'DVD') ? 'selected="selected"' : ''; ?>>DVD</option>
+                <option value="Book">>Book</option>
+                <option value="Furniture">Furniture</option>
+                <option value="DVD">DVD</option>
             </select>
         </div>
         <div id="additional-fields">
