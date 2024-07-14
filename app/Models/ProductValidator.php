@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use mysqli;
+
 class ProductValidator
 {
     public static function validate($data, $product_type)
@@ -13,6 +15,13 @@ class ProductValidator
         $price = $_POST['price'] ?? Null;
 
         //* Common Validation
+        $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $sql = "SELECT 1 FROM products WHERE sku = '$sku' LIMIT 1";
+        $rows = $connection->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
+        if (count($rows) === 1) {
+            $error = "Sku already in database, please try another one";
+        }
+
         if (!is_numeric($price)) {
             $error = "Price must be numeric";
         }
@@ -25,6 +34,7 @@ class ProductValidator
         }
 
         if ($error !== Null) return $error;
+
 
         //* Per type validation
         $product_class = '\\App\\Models\\' . $product_type;

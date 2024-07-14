@@ -17,15 +17,7 @@ class ProductController
         } elseif ($request_method === "POST") {
 
             //* Handle add product, get all POST data
-            $sku = $_POST['sku'] ?? Null;
-            $title = $_POST['title'] ?? Null;
-            $price = $_POST['price'] ?? Null;
             $product_type = $_POST['product_type'] ?? Null;
-            $weight = $_POST['weight'] ?? Null;
-            $size = $_POST['size'] ?? Null;
-            $length = $_POST['length'] ?? Null;
-            $height = $_POST['height'] ?? Null;
-            $width = $_POST['width'] ?? Null;
 
             //! Validation
             $error = Null;
@@ -38,27 +30,13 @@ class ProductController
                 die();
             }
 
-            //* If no errors,store the product in the database.
+            //* If validation pass,store the product in the database.
             try {
-                Product::store([
-                    'sku' => $sku,
-                    'title' => $title,
-                    'product_type' => $product_type,
-                    // convert numeric strings to floats
-                    'price' => (float)$price,
-                    'weight' => (float)$weight,
-                    'length' => (float)$length,
-                    'height' => (float)$height,
-                    'width' => (float)$width,
-                    'size' => (float) $size
-                ]);
+                Product::store(array_filter($_POST));
             } catch (\Throwable $th) {
-                $errorCode =  $th->getCode();
-                //* check for duplicate sku in the database.
-                if ($errorCode === 1062) {
-                    header('Location: ' . '/product/add?error=' . urlencode("Sku already in database, please try another one"));
-                    die();
-                }
+                $errorMessage = $th->getMessage();
+                header('Location: ' . '/product/add?error=' . urlencode($errorMessage));
+                die();
             }
             header('Location: ' . '/');
         }
