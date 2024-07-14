@@ -15,10 +15,7 @@ class ProductController
             $error = $_GET['error'] ?? Null;
             require_once APP_ROOT . '/app/Views/addProduct.php';
         } elseif ($request_method === "POST") {
-
-            //* Handle add product, get all POST data
             $product_type = $_POST['product_type'] ?? Null;
-
             //! Validation
             $error = Null;
             $error = ProductValidator::validate($_POST, $product_type);
