@@ -20,6 +20,16 @@ class Book extends Product
         $this->weight = $weight;
     }
 
+    public static function validate($data)
+    {
+        $error = Null;
+        $weight = $data['weight'] ?? Null;
+        if ($weight === Null || !is_numeric($weight)) {
+            $error = "Weight must be a valid number.";
+        }
+        return $error;
+    }
+
     public function getWeight()
     {
         return $this->weight;

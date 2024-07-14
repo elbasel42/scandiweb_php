@@ -26,6 +26,18 @@ class Furniture extends Product
         $this->width = $width;
     }
 
+    public static function validate($data)
+    {
+        $length = $data['length'] ?? Null;
+        $height = $data['height'] ?? Null;
+        $width = $data['width'] ?? Null;
+        $error = Null;
+        if (($length === Null || !is_numeric($length) || ($width === Null || !is_numeric($width)) || ($height === Null || !is_numeric($height)))) {
+            $error = "Dimensions must be valid numbers";
+        }
+        return $error;
+    }
+
     public function getHeight()
     {
         return $this->height;

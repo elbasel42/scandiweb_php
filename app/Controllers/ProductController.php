@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductValidator;
 
 class ProductController
 {
@@ -13,42 +14,22 @@ class ProductController
 
             $error = $_GET['error'] ?? Null;
             require_once APP_ROOT . '/app/Views/addProduct.php';
-
         } elseif ($request_method === "POST") {
 
             //* Handle add product, get all POST data
             $sku = $_POST['sku'] ?? Null;
             $title = $_POST['title'] ?? Null;
             $price = $_POST['price'] ?? Null;
-            $productType = $_POST['product_type'] ?? Null;
+            $product_type = $_POST['product_type'] ?? Null;
             $weight = $_POST['weight'] ?? Null;
+            $size = $_POST['size'] ?? Null;
             $length = $_POST['length'] ?? Null;
             $height = $_POST['height'] ?? Null;
             $width = $_POST['width'] ?? Null;
-            $size = $_POST['size'] ?? Null;
 
             //! Validation
             $error = Null;
-            if (!is_numeric($price)) {
-                $error = "Price must be numeric";
-            }
-            if ($sku === Null || $title === Null || $price === Null) {
-                $error = "Missing data, please check that all fields are filled.";
-            }
-
-            if (!in_array($productType, ['Book', 'DVD', 'Furniture'])) {
-                $error = 'Invalid Product Type';
-            }
-
-            // if ($productType === "Book" && ($weight === Null || !is_numeric($weight))) {
-                // $error = "Weight must be a valid number.";
-            // }
-            // if ($productType === 'DVD' && ($size === Null || !is_numeric($size))) {
-                // $error = "Size must be a valid number.";
-            // }
-            // if ($productType === "Furniture" && (($length === Null || !is_numeric($length) || ($width === Null || !is_numeric($width)) || ($height === Null || !is_numeric($height))))) {
-                // $error = "Dimensions must be valid numbers";
-            // }
+            $error = ProductValidator::validate($_POST, $product_type);
 
             //* If error, stop execution and redirect back 
             //* to product add page with an error message.
@@ -62,7 +43,7 @@ class ProductController
                 Product::store([
                     'sku' => $sku,
                     'title' => $title,
-                    'product_type' => $productType,
+                    'product_type' => $product_type,
                     // convert numeric strings to floats
                     'price' => (float)$price,
                     'weight' => (float)$weight,

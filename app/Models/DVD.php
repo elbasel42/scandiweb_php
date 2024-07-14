@@ -20,6 +20,16 @@ class DVD extends Product
         $this->size = $size;
     }
 
+    public static function validate($data)
+    {
+        $error = Null;
+        $size = $data['size'] ?? Null;
+        if ($size === Null || !is_numeric($size)) {
+            $error = "Size must be a valid number.";
+        }
+        return $error;
+    }
+
     public function getSize()
     {
         return $this->size;
