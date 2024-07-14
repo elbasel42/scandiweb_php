@@ -27,18 +27,6 @@ class ProductController
             $width = $_POST['width'] ?? Null;
             $size = $_POST['size'] ?? Null;
 
-            //* Save input data in case of redirect because of an error.
-            session_start();
-            $_SESSION['sku'] = $sku;
-            $_SESSION['title'] = $title;
-            $_SESSION['price'] = $price;
-            // $_SESSION['product_type'] = $productType;
-            $_SESSION['weight'] = $weight;
-            $_SESSION['length'] = $length;
-            $_SESSION['height'] = $height;
-            $_SESSION['width'] = $width;
-            $_SESSION['size'] = $size;
-
             //! Validation
             $error = Null;
             if (!is_numeric($price)) {
@@ -48,9 +36,10 @@ class ProductController
                 $error = "Missing data, please check that all fields are filled.";
             }
 
-            // if (!in_array($productType, ['Book', 'DVD', 'Furniture'])) {
-                // $error = 'Invalid Product Type';
-            // }
+            if (!in_array($productType, ['Book', 'DVD', 'Furniture'])) {
+                $error = 'Invalid Product Type';
+            }
+
             // if ($productType === "Book" && ($weight === Null || !is_numeric($weight))) {
                 // $error = "Weight must be a valid number.";
             // }
@@ -69,7 +58,6 @@ class ProductController
             }
 
             //* If no errors,store the product in the database.
-            //* And destroy session variables
             try {
                 Product::store([
                     'sku' => $sku,
@@ -91,7 +79,6 @@ class ProductController
                     die();
                 }
             }
-            session_destroy();
             header('Location: ' . '/');
         }
     }
