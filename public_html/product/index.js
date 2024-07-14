@@ -22,4 +22,3 @@ typeSwitcher.addEventListener("change", function () {
   }
 });
 
-typeSwitcher.dispatchEvent(new Event("change"));
