@@ -8,8 +8,6 @@ class ProductValidator
 {
     public static function validate($data, $product_type)
     {
-        $error = Null;
-
         $sku = $_POST['sku'] ?? Null;
         $title = $_POST['title'] ?? Null;
         $price = $_POST['price'] ?? Null;
@@ -19,22 +17,18 @@ class ProductValidator
         $sql = "SELECT 1 FROM products WHERE sku = '$sku' LIMIT 1";
         $rows = $connection->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
         if (count($rows) === 1) {
-            $error = "Sku already in database, please try another one";
-            return $error;
+            return "Sku already in database, please try another one";
         }
 
         if (!is_numeric($price)) {
-            $error = "Price must be numeric";
-            return $error;
+            return "Price must be numeric";
         }
         if ($sku === Null || $title === Null || $price === Null) {
-            $error = "Missing data, please check that all fields are filled.";
-            return $error;
+            return "Missing data, please check that all fields are filled.";
         }
 
         if (!in_array($product_type, ['Book', 'DVD', 'Furniture'])) {
-            $error = 'Invalid Product Type';
-            return $error;
+            return 'Invalid Product Type';
         }
 
         //* Per type validation
