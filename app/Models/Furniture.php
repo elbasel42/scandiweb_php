@@ -41,17 +41,17 @@ class Furniture extends Product
 
     public function getHeight()
     {
-        return $this->height;
+        return htmlspecialchars($this->height);
     }
 
     public function getLength()
     {
-        return $this->length;
+        return htmlspecialchars($this->length);
     }
 
     public function getWidth()
     {
-        return $this->width;
+        return htmlspecialchars($this->width);
     }
 
     public function render()

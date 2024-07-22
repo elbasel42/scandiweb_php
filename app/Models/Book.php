@@ -32,7 +32,7 @@ class Book extends Product
 
     public function getWeight()
     {
-        return $this->weight;
+        return htmlspecialchars($this->weight);
     }
 
     public function render()

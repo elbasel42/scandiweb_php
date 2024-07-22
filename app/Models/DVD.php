@@ -32,7 +32,7 @@ class DVD extends Product
 
     public function getSize()
     {
-        return $this->size;
+        return htmlspecialchars($this->size);
     }
 
     public function render()
