@@ -22,8 +22,8 @@ class Product
         $values = [];
         $question_marks_string = implode(', ', array_fill(0, count($data), '?'));
         foreach ($data as $k => $v) {
-            array_push($keys, htmlspecialchars($k));
-            array_push($values, htmlspecialchars($v));
+            array_push($keys, $k);
+            array_push($values, $v);
         }
         $keys_string = implode(', ', $keys);
         $sql = "INSERT INTO products ($keys_string) VALUES ($question_marks_string)";
