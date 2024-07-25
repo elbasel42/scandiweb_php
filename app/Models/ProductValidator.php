@@ -14,8 +14,8 @@ class ProductValidator
 
         //* Common Validation
         $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        $sql = "SELECT 1 FROM products WHERE sku = '$sku' LIMIT 1";
-        $rows = $connection->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
+        $sql = "SELECT 1 FROM products WHERE sku = ? LIMIT 1";
+        $rows = $connection->execute_query($sql, [$sku])->fetch_all(MYSQLI_ASSOC);
         if (count($rows) === 1) {
             return "Sku already in database, please try another one";
         }
